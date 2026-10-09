@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aarav & Meera — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf6ef;--bg2:#f1e9dc;--ink:#3a2f2a;--soft:#7a6b61;--gold:#b08d57;--gold2:#d8bb85;--card:#fffdf8;--line:rgba(176,141,87,.35);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15110f;--bg2:#1d1815;--ink:#f1e8da;--soft:#b7a999;--gold:#d3b077;--gold2:#e7cf9f;--card:#1f1a17;--line:rgba(211,176,119,.35)}}
+:root[data-theme="dark"]{--bg:#15110f;--bg2:#1d1815;--ink:#f1e8da;--soft:#b7a999;--gold:#d3b077;--gold2:#e7cf9f;--card:#1f1a17;--line:rgba(211,176,119,.35)}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',system-ui,sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden;height:100%}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+section{position:relative;z-index:2;padding:96px 24px;text-align:center}
+.eyebrow{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold)}
+h2{font-size:clamp(2rem,6vw,3.2rem);margin:14px 0 8px}
+.divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:18px auto 40px;color:var(--gold)}
+.divider::before,.divider::after{content:"";width:64px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.divider::after{transform:scaleX(-1)}
+.divider i{width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1.2s cubic-bezier(.2,.7,.2,1),transform 1.2s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+/* splash */
+#splash{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,var(--bg2),var(--bg));transition:opacity 1.4s ease,visibility 1.4s}
+#splash.out{opacity:0;visibility:hidden}
+.mono{width:132px;height:132px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-size:2.6rem;color:var(--gold);position:relative;animation:breathe 4s ease-in-out infinite}
+.mono::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid var(--line);animation:ring 4s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.04)}}
+@keyframes ring{0%{transform:scale(.92);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+#splash p{margin:34px 0 22px;font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:var(--soft)}
+.btn{font:inherit;font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;padding:15px 34px;border:1px solid var(--gold);background:transparent;color:var(--ink);cursor:pointer;position:relative;overflow:hidden;transition:color .5s;text-decoration:none;display:inline-block}
+.btn::before{content:"";position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .5s cubic-bezier(.2,.7,.2,1);z-index:-1}
+.btn:hover{color:#fff}.btn:hover::before{transform:none}
+.btn{z-index:0}
+
+/* hero */
+#hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:60px}
+.arches{display:flex;gap:clamp(10px,3vw,28px);align-items:flex-end;justify-content:center;margin-bottom:34px}
+.photo{width:clamp(130px,36vw,250px);aspect-ratio:3/4.3;border-radius:999px 999px 6px 6px;border:1px solid var(--gold);padding:7px;position:relative;cursor:pointer;opacity:0;transform:translateY(40px) scale(.96);transition:all 1.8s cubic-bezier(.2,.7,.2,1)}
+.photo:nth-child(2){margin-bottom:-26px;transition-delay:.35s}
+.photo span{display:block;width:100%;height:100%;border-radius:inherit;background:linear-gradient(160deg,var(--bg2),var(--gold2)) center/cover;position:relative;overflow:hidden}
+.photo span svg{position:absolute;inset:0;margin:auto;width:46%;opacity:.5;color:var(--gold)}
+.photo span.has svg{display:none}
+.photo small{position:absolute;bottom:14px;left:0;right:0;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#fff;opacity:.85;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.photo span.has+small{display:none}
+.live-on .photo{opacity:1;transform:none}
+.photo span{animation:float 7s ease-in-out infinite}
+.photo:nth-child(2) span{animation-delay:-3s}
+@keyframes float{50%{transform:translateY(-8px)}}
+.names{font-size:clamp(2.6rem,10vw,6rem);line-height:1.05;display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:0 .3em;margin-top:20px}
+.names .amp{font-style:italic;color:var(--gold);font-size:.7em}
+.names span.w{display:inline-flex}
+.names .l{opacity:0;transform:translateY(24px);filter:blur(6px);display:inline-block;transition:all 1.3s cubic-bezier(.2,.7,.2,1);transition-delay:calc(1.6s + var(--i)*.09s)}
+.live-on .names .l{opacity:1;transform:none;filter:none}
+.tag{margin-top:18px;opacity:0;transition:opacity 2s 3.4s}
+.live-on .tag{opacity:1}
+.scroll{margin-top:44px;width:1px;height:56px;background:linear-gradient(var(--gold),transparent);transform-origin:top;animation:drip 2.4s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* details */
+#details{background:var(--bg2)}
+.date{font-size:clamp(1.6rem,5vw,2.4rem);margin-top:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:900px;margin:44px auto}
+.card{background:var(--card);border:1px solid var(--line);padding:34px 22px;transition:transform .7s cubic-bezier(.2,.7,.2,1),box-shadow .7s}
+.card:hover{transform:translateY(-6px);box-shadow:0 24px 50px -28px rgba(120,90,40,.5)}
+.card h3{font-size:1.5rem;margin:10px 0 6px}
+.card p{color:var(--soft);font-size:.92rem;line-height:1.7}
+.count{display:flex;justify-content:center;gap:clamp(14px,4vw,40px);margin-top:20px}
+.count div{min-width:64px}
+.count b{display:block;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.2rem,8vw,3.4rem);color:var(--gold);font-variant-numeric:tabular-nums}
+.count em{font-style:normal;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--soft)}
+
+/* media */
+.frame{max-width:960px;margin:0 auto;aspect-ratio:16/9;position:relative;border:1px solid var(--gold);padding:9px;background:var(--card)}
+.frame iframe,.frame .ph{width:100%;height:100%;border:0;display:block}
+.ph{display:grid;place-items:center;align-content:center;gap:14px;background:linear-gradient(135deg,var(--bg2),var(--card));color:var(--soft);font-size:.85rem;letter-spacing:.1em;padding:20px}
+.play{width:74px;height:74px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);animation:breathe 3.5s ease-in-out infinite}
+.badge{display:inline-flex;align-items:center;gap:9px;font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold)}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:#c0392b;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.6)}100%{box-shadow:0 0 0 12px rgba(192,57,43,0)}}
+
+/* gallery */
+.grid{max-width:1000px;margin:0 auto;columns:3 220px;column-gap:14px}
+.g{break-inside:avoid;margin-bottom:14px;position:relative;overflow:hidden;cursor:pointer;background:linear-gradient(150deg,var(--bg2),var(--gold2));border:1px solid var(--line)}
+.g span{display:block;width:100%;background:center/cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1);color:var(--gold);}
+.g:hover span{transform:scale(1.06)}
+.g span svg{width:34%;margin:auto;display:block;position:relative;top:50%;transform:translateY(-50%);opacity:.5}
+.g span.has svg{display:none}
+.hint{font-size:.72rem;color:var(--soft);margin-top:22px;letter-spacing:.08em}
+
+footer{position:relative;z-index:2;text-align:center;padding:80px 24px 120px;background:var(--bg2)}
+footer .serif{font-size:2rem;color:var(--gold);font-style:italic}
+#mus{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:40;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold);cursor:pointer;display:grid;place-items:center;opacity:0;transition:opacity 1s 2s}
+.live-on #mus{opacity:1}
+#mus .bars{display:flex;gap:3px;align-items:flex-end;height:16px}
+#mus .bars i{width:2px;background:currentColor;height:30%;animation:eq 1.2s ease-in-out infinite}
+#mus .bars i:nth-child(2){animation-delay:-.4s}#mus .bars i:nth-child(3){animation-delay:-.8s}
+#mus.off .bars i{animation:none;height:25%}
+@keyframes eq{50%{height:100%}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important;transition-delay:0s!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body class="lock">
+<canvas id="fx"></canvas>
+
+<div id="splash">
+  <div class="mono serif" id="mono">A&nbsp;M</div>
+  <p>You are invited</p>
+  <button class="btn" id="open">Open Invitation</button>
+</div>
+
+<button id="mus" aria-label="Toggle music"><div class="bars"><i></i><i></i><i></i></div></button>
+
+<section id="hero">
+  <div class="eyebrow tag">Together with their families</div>
+  <div class="arches" style="margin-top:28px">
+    <div class="photo" data-slot><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><small>Add photo</small></div>
+    <div class="photo" data-slot><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><small>Add photo</small></div>
+  </div>
+  <h1 class="names" id="names" aria-label="Aarav and Meera"></h1>
+  <p class="eyebrow tag" style="margin-top:20px">Are getting married</p>
+  <div class="scroll"></div>
+</section>
+
+<section id="details">
+  <div class="eyebrow rv">Save the date</div>
+  <h2 class="rv" style="--d:.1s">Sunday, 14 February 2027</h2>
+  <div class="date serif rv" style="--d:.2s;font-style:italic;color:var(--soft)">at eleven in the morning</div>
+  <div class="divider rv" style="--d:.3s"><i></i></div>
+  <div class="count rv" id="count" style="--d:.35s"></div>
+  <div class="cards">
+    <div class="card rv" style="--d:.1s"><div class="eyebrow">Ceremony</div><h3>Wedding Ritual</h3><p>11:00 AM<br>Grand Ballroom, The Palace Gardens</p></div>
+    <div class="card rv" style="--d:.25s"><div class="eyebrow">Celebration</div><h3>Reception &amp; Dinner</h3><p>7:30 PM onwards<br>Open lawn under the stars</p></div>
+    <div class="card rv" style="--d:.4s"><div class="eyebrow">Dress Code</div><h3>Elegant Festive</h3><p>Ivory, champagne &amp; soft pastels<br>are most welcome</p></div>
+  </div>
+</section>
+
+<section id="film">
+  <div class="eyebrow rv">Our story</div>
+  <h2 class="rv" style="--d:.1s">The Pre-Wedding Film</h2>
+  <div class="divider rv"><i></i></div>
+  <div class="frame rv" id="film-frame"></div>
+</section>
+
+<section id="gallery" style="background:var(--bg2)">
+  <div class="eyebrow rv">Moments</div>
+  <h2 class="rv" style="--d:.1s">Gallery</h2>
+  <div class="divider rv"><i></i></div>
+  <div class="grid" id="grid"></div>
+  <p class="hint rv">Tap any frame to preview your own photo</p>
+</section>
+
+<section id="venue">
+  <div class="eyebrow rv">Find us</div>
+  <h2 class="rv" style="--d:.1s">The Venue</h2>
+  <p class="rv" style="color:var(--soft);margin-top:6px" id="addr"></p>
+  <div class="divider rv"><i></i></div>
+  <div class="frame rv" id="map-frame"></div>
+  <p class="rv" style="margin-top:30px"><a class="btn" id="maplink" target="_blank" rel="noopener">Open in Google Maps</a></p>
+</section>
+
+<section id="live" style="background:var(--bg2)">
+  <div class="badge rv">Live Telecast</div>
+  <h2 class="rv" style="--d:.1s">Join us from anywhere</h2>
+  <p class="rv" style="color:var(--soft);max-width:520px;margin:6px auto 0;line-height:1.7">Can't be there in person? Watch the ceremony live with us, 11:00 AM IST.</p>
+  <div class="divider rv"><i></i></div>
+  <div class="frame rv" id="live-frame"></div>
+</section>
+
+<footer>
+  <div class="serif rv">With love &amp; gratitude</div>
+  <p class="rv" style="margin-top:14px;color:var(--soft);font-size:.9rem;letter-spacing:.1em">Aarav &amp; Meera · 14.02.2027</p>
+</footer>
+
+<script>
+/* ======= EDIT THESE ======= */
+const CFG={
+  groom:"Aarav", bride:"Meera",
+  date:"2027-02-14T11:00:00+05:30",
+  address:"The Palace Gardens, Mumbai, Maharashtra",
+  preweddingYouTubeId:"",   // e.g. "dQw4w9WgXcQ"
+  liveYouTubeId:""          // YouTube live video ID
+};
+/* ========================== */
+const $=s=>document.querySelector(s);
+
+// names
+(function(){const n=$('#names');let i=0;
+ const w=t=>{const s=document.createElement('span');s.className='w';[...t].forEach(c=>{const l=document.createElement('span');l.className='l';l.style.setProperty('--i',i++);l.textContent=c;s.appendChild(l)});return s};
+ n.append(w(CFG.groom));const a=document.createElement('span');a.className='amp l';a.style.setProperty('--i',i++);a.textContent='&';n.append(a);n.append(w(CFG.bride));
+ const m=$('#mono');m.textContent=CFG.groom[0]+' '+CFG.bride[0];
+})();
+
+// frames
+function frame(id,ytId,label,icon){const f=$(id);
+ f.innerHTML=ytId?`<iframe src="https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1" allow="accelerometer;autoplay;encrypted-media;picture-in-picture;fullscreen" allowfullscreen title="${label}"></iframe>`
+ :`<div class="ph"><div class="play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><span>${label}</span></div>`}
+frame('#film-frame',CFG.preweddingYouTubeId,'Your pre-wedding film appears here');
+frame('#live-frame',CFG.liveYouTubeId,'The live stream will appear here on the wedding day');
+$('#addr').textContent=CFG.address;
+const q=encodeURIComponent(CFG.address);
+$('#map-frame').innerHTML=`<iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${q}&output=embed" title="Wedding venue map"></iframe>`;
+$('#maplink').href=`https://www.google.com/maps/search/?api=1&query=${q}`;
+
+// gallery
+const ratios=[1.3,.78,1,1.25,.85,1.1];
+$('#grid').innerHTML=ratios.map(r=>`<div class="g" data-slot><span style="aspect-ratio:1/${r}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".7"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="11" r="2"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg></span></div>`).join('');
+
+// photo upload (local preview in this browser)
+const inp=document.createElement('input');inp.type='file';inp.accept='image/*';let tgt=null;
+document.addEventListener('click',e=>{const s=e.target.closest('[data-slot]');if(s){tgt=s.querySelector('span');inp.click()}});
+inp.onchange=()=>{const f=inp.files[0];if(!f||!tgt)return;const r=new FileReader();r.onload=()=>{tgt.style.backgroundImage=`url(${r.result})`;tgt.classList.add('has')};r.readAsDataURL(f)};
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// countdown
+const cnt=$('#count');
+function tick(){let d=Math.max(0,new Date(CFG.date)-Date.now())/1000;
+ const v=[['Days',d/86400],['Hours',d%86400/3600],['Minutes',d%3600/60],['Seconds',d%60]];
+ cnt.innerHTML=v.map(([k,n])=>`<div><b>${String(Math.floor(n)).padStart(2,'0')}</b><em>${k}</em></div>`).join('')}
+tick();setInterval(tick,1000);
+
+// petals / gold dust
+const cv=$('#fx'),cx=cv.getContext('2d');let W,H,P=[];
+function rs(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio}
+addEventListener('resize',rs);rs();
+const dpr=()=>devicePixelRatio;
+for(let i=0;i<26;i++)P.push({x:Math.random(),y:Math.random(),s:.5+Math.random()*1.2,v:.00006+Math.random()*.00014,d:Math.random()*6,r:Math.random()*6,p:Math.random()>.5});
+(function loop(t){cx.clearRect(0,0,W,H);
+ const gold=getComputedStyle(document.documentElement).getPropertyValue('--gold2').trim()||'#d8bb85';
+ P.forEach(p=>{p.y+=p.v*16;p.x+=Math.sin(t/2500+p.d)*.0004;if(p.y>1.05){p.y=-.05;p.x=Math.random()}
+  const x=p.x*W,y=p.y*H,s=p.s*4*dpr();cx.save();cx.translate(x,y);cx.rotate(p.r+t/3000);cx.globalAlpha=.55;cx.fillStyle=gold;
+  cx.beginPath();if(p.p){cx.ellipse(0,0,s*1.6,s*.8,0,0,7)}else{cx.arc(0,0,s*.45,0,7)}cx.fill();cx.restore()});
+ requestAnimationFrame(loop)})(0);
+
+// ===== Music: gentle generative piano-pad (Web Audio, no files) =====
+let AC,master,playing=false,timers=[];
+function startMusic(){
+ AC=new (window.AudioContext||window.webkitAudioContext)();
+ master=AC.createGain();master.gain.value=0;master.connect(AC.destination);
+ const dl=AC.createDelay(1);dl.delayTime.value=.42;const fb=AC.createGain();fb.gain.value=.42;
+ const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2200;
+ dl.connect(fb);fb.connect(lp);lp.connect(dl);lp.connect(master);
+ const bus=AC.createGain();bus.connect(master);bus.connect(dl);
+ const chords=[[261.63,329.63,392],[220,261.63,329.63],[174.61,220,261.63],[196,246.94,293.66]];
+ const pent=[523.25,587.33,659.25,783.99,880,1046.5];
+ function note(f,t,dur,vol,type){const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+(dur>3?2:.02));g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);g.connect(bus);o.start(t);o.stop(t+dur+.1)}
+ let ci=0;
+ function bar(){const t=AC.currentTime+.05;
+  chords[ci%4].forEach((f,i)=>{note(f/2,t,7,.05,'triangle');note(f,t,7,.03,'sine')});
+  for(let k=0;k<5;k++){const f=pent[Math.floor(Math.random()*pent.length)];note(f,t+k*1.3+Math.random()*.2,3.2,.05,'sine')}
+  ci++}
+ bar();timers.push(setInterval(bar,6500));
+ master.gain.linearRampToValueAtTime(.55,AC.currentTime+4);
+ playing=true;$('#mus').classList.remove('off');
+}
+function toggleMusic(){if(!AC)return startMusic();
+ if(playing){master.gain.linearRampToValueAtTime(0,AC.currentTime+.8);setTimeout(()=>AC.suspend(),900);playing=false;$('#mus').classList.add('off')}
+ else{AC.resume();master.gain.linearRampToValueAtTime(.55,AC.currentTime+2);playing=true;$('#mus').classList.remove('off')}}
+$('#mus').onclick=toggleMusic;
+
+// open
+$('#open').onclick=()=>{
+ try{startMusic()}catch(e){$('#mus').classList.add('off')}
+ $('#splash').classList.add('out');
+ setTimeout(()=>{document.body.classList.remove('lock');document.body.classList.add('live-on')},500);
+};
+</script>
+</body>
+</html>
